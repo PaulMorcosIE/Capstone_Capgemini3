@@ -33,8 +33,11 @@ project-root/
 │   ├── raw/           # Vendor-supplied packaging reports, product attributes, supplier metrics
 │   ├── processed/     # Cleaned datasets (post-cleaning, pre-EDA)
 │   └── merged/        # Final feature-engineered dataset for modeling (merged_df.csv)
+├── Dashboard.pbix     # Power BI report file
+├── Dashboard.pdf      # Static version of dashboard
 ├── Data_Cleaning.ipynb    # Raw-to-clean transformation pipeline
 ├── EDA.ipynb              # Exploratory insights and visual analytics
+├── FINAL EXECUTIVE REPORT - CAPGEMINI 3.pdf # Final project report
 ├── Modeling.ipynb         # Full modeling lifecycle (prep, training, tuning, SHAP)
 └── README.md              # Documentation
 ```
