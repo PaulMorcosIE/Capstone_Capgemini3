@@ -8,6 +8,10 @@
 - Sarina Ratnabhas (<sarina.ratnabhas@student.ie.edu>)  
 
 ---
+[ Dashboard Demo Video](https://www.youtube.com/watch?v=er7b_SyiuPA)
+[Power BI Dashboard](https://app.powerbi.com/links/kf1jbQbuE7?ctid=4a39c578-6df0-42b9-a7e0-e9eac6d91816&pbi_source=linkShare&bookmarkGuid=bc6f87e5-b479-4d70-8455-23fb5ae7dff4)
+
+---
 
 ## 📖 Executive Summary
 
