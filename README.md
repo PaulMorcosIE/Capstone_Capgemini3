@@ -78,6 +78,42 @@ Features engineered:
 ### Objective
 Predict whether a package is **Good (0)** or **Bad (1)** before arrival, prioritizing early detection of defects.
 
+### Preprocessing and Feature Engineering 
+| Feature                   | Data Type   | Source     | Description                                         | Feature Type   | Purpose                  |
+|:--------------------------|:------------|:-----------|:----------------------------------------------------|:---------------|:-------------------------|
+| Weight                    | float       | Original   | Product weight in kg                                | Numerical      | Model input              |
+| ProposedUnitsPerCarton    | float       | Original   | Proposed number of units per carton                 | Numerical      | Model input              |
+| PackagesHandled           | float       | Merged     | Monthly number of packages handled by supplier      | Numerical      | Operational load proxy   |
+| TotalIncidents            | float       | Merged     | Number of incidents in the reporting month          | Numerical      | Supplier quality proxy   |
+| AnomaliesDetected         | float       | Merged     | Monthly number of detected anomalies                | Numerical      | Operational risk proxy   |
+| BadPackagingRatePct       | float       | Merged     | Percentage of bad packaging reported monthly        | Numerical      | Supplier quality risk    |
+| OnTimeDeliveryRatePct     | float       | Merged     | On-time delivery rate for the supplier              | Numerical      | Delivery reliability     |
+| AverageCostPerIncidentEUR | float       | Merged     | Average financial cost of an incident               | Numerical      | Cost impact proxy        |
+| TotalHistoricalIncidents  | int         | Aggregated | Historical number of incidents per product-supplier | Numerical      | Long-term risk           |
+| UnresolvedIncidents       | int         | Aggregated | Number of unresolved past incidents                 | Numerical      | Operational risk         |
+| AvgIncidentCost           | float       | Aggregated | Average cost of past incidents                      | Numerical      | Cost risk metric         |
+| ReportYear                | int         | Extracted  | Year of packaging report                            | Categorical    | Seasonality control      |
+| ReportMonthNum            | int         | Extracted  | Month of report                                     | Categorical    | Seasonality control      |
+| ReportQuarter             | int         | Extracted  | Quarter of the year                                 | Categorical    | Seasonality control      |
+| ReportDayOfMonth          | int         | Extracted  | Day of month of report                              | Categorical    | Cycle detection          |
+| ReportDayOfWeek           | int         | Extracted  | Weekday index (0=Mon)                               | Categorical    | Operational schedule     |
+| IsWeekend                 | int         | Engineered | 1 if report submitted on weekend                    | Binary         | Operational variation    |
+| supplier_bad_rate         | float       | Engineered | Historical bad rate for supplier                    | Numerical      | Supplier reliability     |
+| is_high_risk_supplier     | int         | Engineered | 1 if supplier bad rate > median                     | Binary         | Supplier flag            |
+| product_bad_rate          | float       | Engineered | Historical bad rate for product                     | Numerical      | Product quality flag     |
+| is_high_risk_product      | int         | Engineered | 1 if product bad rate > median                      | Binary         | Product flag             |
+| is_risky_supplier_product | int         | Engineered | 1 if both supplier and product are high risk        | Binary         | Interaction effect       |
+| is_wool_product           | int         | Engineered | 1 if material is Wool                               | Binary         | Material-specific risk   |
+| is_low_delivery_perf      | int         | Engineered | 1 if delivery rate < mean                           | Binary         | Supplier delivery risk   |
+| is_high_bad_rate_supplier | int         | Engineered | 1 if bad rate > mean                                | Binary         | Supplier packaging issue |
+| is_bad_incident_history   | int         | Engineered | 1 if incident cost > mean                           | Binary         | Supplier cost risk       |
+| GarmentType_enc           | int         | Encoded    | Garment type (ordinal encoded)                      | Categorical    | Product identifier       |
+| Material_enc              | int         | Encoded    | Material type (ordinal encoded)                     | Categorical    | Product material         |
+| ProposedFoldingMethod_enc | int         | Encoded    | Folding method (ordinal encoded)                    | Categorical    | Packaging proposal       |
+| ProposedLayout_enc        | int         | Encoded    | Proposed packaging layout                           | Categorical    | Layout strategy          |
+| Size_enc                  | int         | Encoded    | Product size                                        | Categorical    | Dimensional control      |
+| Collection_enc            | int         | Encoded    | Seasonal collection                                 | Categorical    | Product grouping         |
+
 ### Strategy
 - Combined structured product, supplier, and incident data into a unified modeling dataset.
 - Categorical encoding and feature engineering applied.
